@@ -14,10 +14,11 @@ public class NIOFileChannel02 {
         //创建channel
         FileChannel channel = fileInputStream.getChannel();
         //创建Bytebuffer
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        ByteBuffer byteBuffer = ByteBuffer.allocate((int)file.length());
         //读取到buffer
         channel.read(byteBuffer);
 
         System.out.println(new String(byteBuffer.array()));
+        fileInputStream.close();
     }
 }

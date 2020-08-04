@@ -18,10 +18,12 @@ public class NewIOServer {
         while(true){
             SocketChannel socketChannel = serverSocketChannel.accept();
             int readCount=0;
-            while (readCount>0){
+            int read=0;
+            while (read!=-1){
                 try {
-                    //readCount = socketChannel.write(buffer);
-                    readCount = fileChannel.write(buffer);
+                    read = socketChannel.write(buffer);
+                    readCount+=read;
+                    fileChannel.transferFrom(socketChannel,readCount,read);
                 } catch (IOException e) {
                     break;
                 }

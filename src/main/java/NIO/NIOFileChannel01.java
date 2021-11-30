@@ -9,7 +9,7 @@ public class NIOFileChannel01 {
 
 
     public static void main(String[] args) throws IOException {
-        String str="hello, i am 小明";
+        String str = "hello, i am 小明";
         //创建一个输出流
         FileOutputStream fileOutputStream = new FileOutputStream("d:\\file01.txt");
         //通过fileoutputstream 获取对应的channel

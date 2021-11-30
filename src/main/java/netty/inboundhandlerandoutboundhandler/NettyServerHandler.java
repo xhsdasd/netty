@@ -8,7 +8,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Long> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Long aLong) throws Exception {
-        System.out.println("收到客户端信息: "+aLong);
+        System.out.println("收到客户端信息: " + aLong);
 
     }
 

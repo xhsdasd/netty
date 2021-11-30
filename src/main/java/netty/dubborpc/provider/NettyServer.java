@@ -11,13 +11,14 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 public class NettyServer {
-    public static void start(String hostName,int port){
-        start0(hostName,port);
+    public static void start(String hostName, int port) {
+        start0(hostName, port);
     }
-    private static void start0(String hostName,int port){
+
+    private static void start0(String hostName, int port) {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap().group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -32,9 +33,9 @@ public class NettyServer {
             ChannelFuture cf = serverBootstrap.bind(port).sync();
             System.out.println("服务方开始提供服务");
             cf.channel().closeFuture().sync();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

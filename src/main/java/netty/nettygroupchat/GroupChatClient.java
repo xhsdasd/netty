@@ -21,7 +21,8 @@ public class GroupChatClient {
         this.hostName = hostName;
         this.port = port;
     }
-    public void run() throws Exception{
+
+    public void run() throws Exception {
         NioEventLoopGroup loopGroup = new NioEventLoopGroup();
 
         try {
@@ -32,18 +33,18 @@ public class GroupChatClient {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast("decode",new StringDecoder());//加入编码解码器
-                            pipeline.addLast("encode",new StringEncoder());
+                            pipeline.addLast("decode", new StringDecoder());//加入编码解码器
+                            pipeline.addLast("encode", new StringEncoder());
                             pipeline.addLast(new GroupChatClientHandler());
                         }
                     });
 
             ChannelFuture channelFuture = bootstrap.connect(hostName, port).sync();
             Channel channel = channelFuture.channel();
-            System.out.println("----"+ channel.localAddress()+"------");
+            System.out.println("----" + channel.localAddress() + "------");
 
             Scanner scanner = new Scanner(System.in);
-            while (scanner.hasNext()){
+            while (scanner.hasNext()) {
                 String s = scanner.nextLine();
                 channel.writeAndFlush(s);
             }
@@ -55,6 +56,6 @@ public class GroupChatClient {
     }
 
     public static void main(String[] args) throws Exception {
-        new GroupChatClient("127.0.0.1",7001).run();
+        new GroupChatClient("127.0.0.1", 7001).run();
     }
 }

@@ -9,7 +9,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message aLong) throws Exception {
-        System.out.println("收到客户端信息: "+new String(aLong.getContent(), CharsetUtil.UTF_8));
+        System.out.println("收到客户端信息: " + new String(aLong.getContent(), CharsetUtil.UTF_8));
 
     }
 

@@ -9,10 +9,9 @@ import java.util.List;
 
 public class MyLongToByteDecoder extends ByteToMessageDecoder {
     /**
-     *
      * @param channelHandlerContext 上下文
-     * @param byteBuf 传入数据
-     * @param list   解码后的消息
+     * @param byteBuf               传入数据
+     * @param list                  解码后的消息
      * @throws Exception
      */
     @Override
@@ -20,7 +19,7 @@ public class MyLongToByteDecoder extends ByteToMessageDecoder {
         System.out.println("MyLongToByteDecoder decode 被调用");
 
         //在调用readLong()方法前必须验证所输入的ByteBuf是否具有足够的数据
-        if(byteBuf.readableBytes()>=8){
+        if (byteBuf.readableBytes() >= 8) {
             //把数据处理后的数据转成Long 传递到下一个handler
             list.add(byteBuf.readLong());
         }

@@ -10,14 +10,14 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<MyDataInfo.M
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MyDataInfo.Mymessage mymessage) throws Exception {
         //学生对象
-        switch (mymessage.getDataType()){
+        switch (mymessage.getDataType()) {
             case WorkerType:
                 MyDataInfo.Worker worker = mymessage.getWorker();
-                System.out.println("工人信息:姓名："+worker.getName()+" age:"+worker.getAge());
+                System.out.println("工人信息:姓名：" + worker.getName() + " age:" + worker.getAge());
                 break;
             case StudentType:
                 MyDataInfo.Student student = mymessage.getStudent();
-                System.out.println("学生信息:姓名："+student.getName()+" id:"+student.getId());
+                System.out.println("学生信息:姓名：" + student.getName() + " id:" + student.getId());
                 break;
             default:
                 System.out.println("传送数据格式不对!");
@@ -29,7 +29,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<MyDataInfo.M
     //数据读取完毕
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-      //数据写入缓存并刷新
+        //数据写入缓存并刷新
         ctx.writeAndFlush(Unpooled.copiedBuffer("hello 客户端 (>^ω^<)喵", CharsetUtil.UTF_8));
 
     }

@@ -1,7 +1,8 @@
 package netty.tcp;
+
 //自定义协议
 public class Message {
-private int len; //字节长度
+    private int len; //字节长度
     private byte[] content;//内容
 
     public int getLen() {

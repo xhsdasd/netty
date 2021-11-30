@@ -12,7 +12,7 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
         //获取管道
         ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast("MyHttpServerCodec",new HttpServerCodec());//HttpServerCodec是netty提供的编解码器
-        pipeline.addLast("Myhandler",new HttpHandler());
+        pipeline.addLast("MyHttpServerCodec", new HttpServerCodec());//HttpServerCodec是netty提供的编解码器
+        pipeline.addLast("Myhandler", new HttpHandler());
     }
 }

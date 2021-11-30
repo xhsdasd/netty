@@ -8,10 +8,9 @@ import java.util.List;
 
 public class MyLongToByteDecoder extends ReplayingDecoder<Message> {
     /**
-     *
      * @param channelHandlerContext 上下文
-     * @param byteBuf 传入数据
-     * @param list   解码后的消息
+     * @param byteBuf               传入数据
+     * @param list                  解码后的消息
      * @throws Exception
      */
     @Override

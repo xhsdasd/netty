@@ -15,15 +15,15 @@ public class NewIOServer {
 
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         FileChannel fileChannel = new FileOutputStream("newNetty.pdf").getChannel();
-        while(true){
+        while (true) {
             SocketChannel socketChannel = serverSocketChannel.accept();
-            int readCount=0;
-            int read=0;
-            while (read!=-1){
+            int readCount = 0;
+            int read = 0;
+            while (read != -1) {
                 try {
                     read = socketChannel.write(buffer);
-                    readCount+=read;
-                    fileChannel.transferFrom(socketChannel,readCount,read);
+                    readCount += read;
+                    fileChannel.transferFrom(socketChannel, readCount, read);
                 } catch (IOException e) {
                     break;
                 }

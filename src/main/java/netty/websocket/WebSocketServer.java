@@ -16,19 +16,20 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class WebSocketServer {
-private int port;
+    private int port;
 
     public WebSocketServer(int port) {
         this.port = port;
     }
-    public void run()throws Exception{
+
+    public void run() throws Exception {
 
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
-                    .group(bossGroup,workerGroup)
+                    .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))//服务器设置日记处理器
                     .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -56,13 +57,13 @@ private int port;
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
-                bossGroup.shutdownGracefully();
-                workerGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
         }
 
     }
 
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
         new WebSocketServer(7001).run();
     }
 }

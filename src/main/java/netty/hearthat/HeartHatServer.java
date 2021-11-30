@@ -14,26 +14,27 @@ import io.netty.handler.timeout.IdleStateHandler;
 import java.util.concurrent.TimeUnit;
 
 public class HeartHatServer {
-private int port;
+    private int port;
 
     public HeartHatServer(int port) {
         this.port = port;
     }
-    public void run()throws Exception{
+
+    public void run() throws Exception {
 
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
-                    .group(bossGroup,workerGroup)
+                    .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new IdleStateHandler(3,5,7, TimeUnit.SECONDS));//心跳 交给下个handler处理
+                            pipeline.addLast(new IdleStateHandler(3, 5, 7, TimeUnit.SECONDS));//心跳 交给下个handler处理
                             pipeline.addLast(new HeartHatServerHandler());
                         }
                     });
@@ -47,6 +48,6 @@ private int port;
     }
 
     public static void main(String[] args) throws Exception {
-        new  HeartHatServer(7001).run();
+        new HeartHatServer(7001).run();
     }
 }

@@ -10,13 +10,14 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        StudentPOJO.Student student= (StudentPOJO.Student) msg;//获取
-        System.out.println("学生id:"+((StudentPOJO.Student) msg).getId()+" ，姓名:"+((StudentPOJO.Student) msg).getName());
+        StudentPOJO.Student student = (StudentPOJO.Student) msg;//获取
+        System.out.println("学生id:" + ((StudentPOJO.Student) msg).getId() + " ，姓名:" + ((StudentPOJO.Student) msg).getName());
     }
-//数据读取完毕
+
+    //数据读取完毕
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-      //数据写入缓存并刷新
+        //数据写入缓存并刷新
         ctx.writeAndFlush(Unpooled.copiedBuffer("hello 客户端 (>^ω^<)喵", CharsetUtil.UTF_8));
 
     }

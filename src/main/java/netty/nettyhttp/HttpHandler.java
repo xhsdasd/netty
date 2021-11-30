@@ -13,23 +13,23 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
         //判断是否request请求
-        if(msg instanceof HttpRequest){
+        if (msg instanceof HttpRequest) {
             HttpRequest request = (HttpRequest) msg;
             //过滤
-            if(request.uri().equals("/favicon.ico")){
+            if (request.uri().equals("/favicon.ico")) {
                 System.out.println("ico请求，不做处理");
                 return;
             }
 
         }
         //回复信息 给浏览器(http协议)
-        ByteBuf content= Unpooled.copiedBuffer("hello,我是服务器", CharsetUtil.UTF_8);
+        ByteBuf content = Unpooled.copiedBuffer("hello,我是服务器", CharsetUtil.UTF_8);
 
         //构建一个httpreponse
-        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK,content);
+        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
 
-        response.headers().set(HttpHeaderNames.CONTENT_TYPE,"text/plain;charset=UTF-8");//设置响应类型
-        response.headers().set(HttpHeaderNames.CONTENT_LENGTH,content.readableBytes());//响应长度
+        response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain;charset=UTF-8");//设置响应类型
+        response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());//响应长度
         ctx.writeAndFlush(response);
 
     }

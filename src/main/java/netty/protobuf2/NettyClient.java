@@ -24,7 +24,7 @@ public class NettyClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast("encode",new ProtobufEncoder());//加入protobuf编码器
+                            pipeline.addLast("encode", new ProtobufEncoder());//加入protobuf编码器
                             pipeline.addLast(new NettyClientHandler()); //设置自己的handler
                         }
                     });

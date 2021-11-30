@@ -17,10 +17,12 @@ public class NIOFileChannel03 {
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(512);
 
-        while (true){
+        while (true) {
             byteBuffer.clear();//清空数据，否则死循环
             int read = fileInputStreamChannel.read(byteBuffer);
-            if(read==-1){break;}
+            if (read == -1) {
+                break;
+            }
 
             //写数据，将buffer反转
             byteBuffer.flip();

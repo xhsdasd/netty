@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class WebSocketHandlet extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-//异常
+    //异常
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println("异常发生");
@@ -23,15 +23,15 @@ public class WebSocketHandlet extends SimpleChannelInboundHandler<TextWebSocketF
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("handlerAdded被调用"+ctx.channel().id().asLongText());
-        System.out.println("handlerAdded被调用"+ctx.channel().id().asShortText());
+        System.out.println("handlerAdded被调用" + ctx.channel().id().asLongText());
+        System.out.println("handlerAdded被调用" + ctx.channel().id().asShortText());
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
         Channel channel = channelHandlerContext.channel();
         System.out.println(textWebSocketFrame.text());
-        channel.writeAndFlush(new TextWebSocketFrame("服务器时间:"+LocalDateTime.now()+"说: "+textWebSocketFrame.text()));
+        channel.writeAndFlush(new TextWebSocketFrame("服务器时间:" + LocalDateTime.now() + "说: " + textWebSocketFrame.text()));
     }
-    }
+}
 

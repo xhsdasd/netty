@@ -9,17 +9,17 @@ public class HttpServer {
     public static void main(String[] args) throws Exception {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-try {
-    ServerBootstrap serverBootstrap = new ServerBootstrap();
-    serverBootstrap.group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .childHandler(new MyChannelInitializer());
+        try {
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
+            serverBootstrap.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new MyChannelInitializer());
 
-    ChannelFuture channelFuture = serverBootstrap.bind(7001).sync();
-    channelFuture.channel().closeFuture().sync();
-}finally {
-    bossGroup.shutdownGracefully();
-    workerGroup.shutdownGracefully();
-}
+            ChannelFuture channelFuture = serverBootstrap.bind(7001).sync();
+            channelFuture.channel().closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
     }
 }

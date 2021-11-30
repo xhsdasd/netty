@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
-   //就绪状态
+    //就绪状态
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
@@ -17,11 +17,11 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         int i = new Random().nextInt(3);
         MyDataInfo.Mymessage mymessage = null;
         System.out.println(i);
-        if(0==i){//学生
-            mymessage=MyDataInfo.Mymessage.newBuilder().setDataType(MyDataInfo.Mymessage.DataType.StudentType)
+        if (0 == i) {//学生
+            mymessage = MyDataInfo.Mymessage.newBuilder().setDataType(MyDataInfo.Mymessage.DataType.StudentType)
                     .setStudent(MyDataInfo.Student.newBuilder().setId(1).setName("尼玛同学").build()).build();
-        }else  { //工人
-            mymessage=MyDataInfo.Mymessage.newBuilder().setDataType(MyDataInfo.Mymessage.DataType.WorkerType)
+        } else { //工人
+            mymessage = MyDataInfo.Mymessage.newBuilder().setDataType(MyDataInfo.Mymessage.DataType.WorkerType)
                     .setWorker(MyDataInfo.Worker.newBuilder().setAge(20).setName("尼玛工人").build()).build();
 
         }
@@ -32,8 +32,8 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf byteBuf = (ByteBuf) msg;
-        System.out.println("服务器回复的信息:"+byteBuf.toString(CharsetUtil.UTF_8));
-        System.out.println("服务器地址:"+ctx.channel().remoteAddress());
+        System.out.println("服务器回复的信息:" + byteBuf.toString(CharsetUtil.UTF_8));
+        System.out.println("服务器地址:" + ctx.channel().remoteAddress());
 
     }
 

@@ -12,13 +12,13 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        context=ctx;
+        context = ctx;
     }
 
     @Override
     public synchronized void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-       result=msg.toString();
-       notify();//唤醒等待的线程
+        result = msg.toString();
+        notify();//唤醒等待的线程
     }
 
     @Override
@@ -35,7 +35,8 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
         //返回结果
         return result;
     }
-    void setParm(String parm){
-        this.parm=parm;
+
+    void setParm(String parm) {
+        this.parm = parm;
     }
 }

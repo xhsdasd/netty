@@ -1,27 +1,27 @@
-syntax="proto3"; //版本
+syntax = "proto3"; //版本
 
-option java_outer_classname="MyDataInfo";//生产的外部类,同时也是文件名
-option optimize_for=SPEED;//加快解析
-option java_package="netty.protobuf2";//指定生成到哪个包下
+option java_outer_classname = "MyDataInfo";//生产的外部类,同时也是文件名
+option optimize_for = SPEED;//加快解析
+option java_package = "netty.protobuf2";//指定生成到哪个包下
 //protobuf 使用message管理数据
 message Mymessage{
   enum DataType{
-    StudentType=0;//枚举类序号从0开始
-    WorkerType=1;
+    StudentType = 0;//枚举类序号从0开始
+    WorkerType = 1;
   }
-  DataType dataType=1;//标识哪个类型
-  oneof dataBody{  //每次枚举类型最多出现其中的一个
-  Student student=2;
-  Worker worker=3;
+  DataType dataType = 1;//标识哪个类型
+  oneof dataBody{//每次枚举类型最多出现其中的一个
+    Student student = 2;
+    Worker worker = 3;
   }
 }
-message Student{ //会在studentPOJO中生成一个内部类Student,也是真正发送的POJO对象
-  int32 id=1; //Student类中有个属性名字为id，类型int32(protobuf类型),1表示属性序号，不是值
-  string name=2;
+message Student{//会在studentPOJO中生成一个内部类Student,也是真正发送的POJO对象
+  int32 id = 1; //Student类中有个属性名字为id，类型int32(protobuf类型),1表示属性序号，不是值
+  string name = 2;
   //编译指令 protoc.exe --java_out=. Studetn.proto
 }
-message Worker{ //会在studentPOJO中生成一个内部类Student,也是真正发送的POJO对象
-  int32 age=1; //Student类中有个属性名字为id，类型int32(protobuf类型),1表示属性序号，不是值
-  string name=2;
+message Worker{//会在studentPOJO中生成一个内部类Student,也是真正发送的POJO对象
+  int32 age = 1; //Student类中有个属性名字为id，类型int32(protobuf类型),1表示属性序号，不是值
+  string name = 2;
   //编译指令 protoc.exe --java_out=. Studetn.proto
 }

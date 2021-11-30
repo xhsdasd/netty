@@ -21,8 +21,8 @@ public class NIOServer {
         serverSocketChannel.configureBlocking(false);
         //注册到register,事件OP_ACCEPT
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-        while(true){
-            if(selector.select(1000)==0){
+        while (true) {
+            if (selector.select(1000) == 0) {
                 System.out.println("服务器等待了1s，无连接");
                 continue;
             }
@@ -30,24 +30,24 @@ public class NIOServer {
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             //遍历selectionkeys
             Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
-            while (keyIterator.hasNext()){
+            while (keyIterator.hasNext()) {
                 SelectionKey key = keyIterator.next();
-                if (key.isAcceptable()){
+                if (key.isAcceptable()) {
                     SocketChannel socketChannel = serverSocketChannel.accept();
-                    System.out.println("客户端连接成功 生成一个 socketchannel："+socketChannel.hashCode());
+                    System.out.println("客户端连接成功 生成一个 socketchannel：" + socketChannel.hashCode());
                     //channel设为非阻塞
                     socketChannel.configureBlocking(false);
                     //注册读事件，同时给一个bytebuffer
                     socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
 
                 }
-                if(key.isReadable()){
-                    SocketChannel readChannel =(SocketChannel) key.channel();
+                if (key.isReadable()) {
+                    SocketChannel readChannel = (SocketChannel) key.channel();
                     //获取buffer
-                    ByteBuffer buffer =(ByteBuffer) key.attachment();
+                    ByteBuffer buffer = (ByteBuffer) key.attachment();
 
                     readChannel.read(buffer);
-                    System.out.println("form 客户端:"+new String(buffer.array()));
+                    System.out.println("form 客户端:" + new String(buffer.array()));
 
                 }
                 //将key移除 防止重复处理

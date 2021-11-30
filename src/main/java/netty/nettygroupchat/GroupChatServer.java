@@ -14,25 +14,26 @@ import io.netty.handler.codec.string.StringEncoder;
 public class GroupChatServer {
     private int port;
 
-    public GroupChatServer(int port){
-        this.port=port;
+    public GroupChatServer(int port) {
+        this.port = port;
     }
-    public void run() throws Exception{
+
+    public void run() throws Exception {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
             ServerBootstrap bootstrap = new ServerBootstrap()
-                    .group(bossGroup,workerGroup)
+                    .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG,128)
-                    .childOption(ChannelOption.SO_KEEPALIVE,true)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast("decode",new StringDecoder());//加入编码解码器
-                            pipeline.addLast("encode",new StringEncoder());
+                            pipeline.addLast("decode", new StringDecoder());//加入编码解码器
+                            pipeline.addLast("encode", new StringEncoder());
                             pipeline.addLast(new GroupChatServerHandler());//加入自定义业务handler
                         }
                     });
@@ -45,7 +46,7 @@ public class GroupChatServer {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         new GroupChatServer(7001).run();
     }
 }

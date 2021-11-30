@@ -14,7 +14,7 @@ public class NIOFileChannel02 {
         //创建channel
         FileChannel channel = fileInputStream.getChannel();
         //创建Bytebuffer
-        ByteBuffer byteBuffer = ByteBuffer.allocate((int)file.length());
+        ByteBuffer byteBuffer = ByteBuffer.allocate((int) file.length());
         //读取到buffer
         channel.read(byteBuffer);
 

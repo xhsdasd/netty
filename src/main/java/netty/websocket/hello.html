@@ -7,33 +7,34 @@
 <body>
 <script>
     var socket;
-    if(window.WebSocket){
-       socket=new WebSocket("ws://localhost:7001/hello")
+    if (window.WebSocket) {
+        socket = new WebSocket("ws://localhost:7001/hello")
         //socket得到服务器回复的信息
-        socket.onmessage=(ev => {
-           let r=document.getElementById("responseText")
-               r.value+=ev.data
+        socket.onmessage = (ev => {
+            let r = document.getElementById("responseText")
+            r.value += ev.data
         })
         //感知连接开启
-        socket.onopen=(ev =>document.getElementById("responseText").value='连接开启' )
+        socket.onopen = (ev => document.getElementById("responseText").value = '连接开启')
         //感知连接关闭
-        socket.onclose=(ev => {
-            let r=document.getElementById("responseText")
-            r.value+="连接关闭";
+        socket.onclose = (ev => {
+            let r = document.getElementById("responseText")
+            r.value += "连接关闭";
         })
+
         function send(message) {
-           if(window.socket){//判断socket是否创建好
-                if(socket.readyState==WebSocket.OPEN){
+            if (window.socket) {//判断socket是否创建好
+                if (socket.readyState == WebSocket.OPEN) {
                     socket.send(message)
-                }else {
+                } else {
                     alert("连接没有开启");
                 }
-           }else {
-               return;
-           }
+            } else {
+                return;
+            }
 
         }
-    }else {
+    } else {
         alert("不支持websocket")
     }
 

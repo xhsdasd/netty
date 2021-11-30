@@ -26,7 +26,7 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast("decode",new ProtobufDecoder(StudentPOJO.Student.getDefaultInstance()));//加入protobuf解码器
+                            pipeline.addLast("decode", new ProtobufDecoder(StudentPOJO.Student.getDefaultInstance()));//加入protobuf解码器
                             pipeline.addLast(new NettyServerHandler());//自定义处理器
                         }
                     });
